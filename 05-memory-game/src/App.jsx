@@ -14,13 +14,14 @@ function App() {
   const [cards, setCards] = useState(cardGame)
   const [countCardsUP, setCountCardsUP] = useState(0);
 
-
   const setCardUp = (index) =>{
+    if (countCardsUP < 2){
       const newCards = [... cards];
       newCards[index] = TOTAL_CARDS[index]
       setCards(newCards);
       const countCards = countCardsUP + 1;
       setCountCardsUP(countCards)
+    }
   }
 
   return (
