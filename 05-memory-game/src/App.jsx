@@ -18,9 +18,10 @@ function App() {
 
     const refreshCrads = () =>{
     const newCards = [... cards];
-    const updatedCards = newCards.map((card, index) => {
+    
+    const updatedCards = newCards.map((cardMap, index) => {
       if (!indexPairs.includes(index)){
-        card = null
+        cardMap = null
       }
     })
 
@@ -58,11 +59,14 @@ function App() {
 
           console.log('Indice de parejas: ' + indexPairs)
           console.log("Pareja econtrada")
+          setCountCardsUP(0)
+          setCardPairs([])
         }else{
           console.log("Error. La pareja de cartas levantada no coincide")
           
           // Reiniciamos el contador de cartas para permitir continuar el juego
           refreshCrads()
+          setCardPairs([])
           setCountCardsUP(0)
 
 
