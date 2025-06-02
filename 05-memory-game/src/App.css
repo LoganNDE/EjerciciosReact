@@ -1,0 +1,12 @@
+body{
+  background-color: #242424;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.board{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}

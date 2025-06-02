@@ -1,0 +1,22 @@
+.card{
+    height: 150px;
+    width: 100px;
+    border: 1px solid white;
+    border-radius: 8px;
+    background-color: rgb(170, 204, 255);
+
+}
+
+.card > span{
+    font-size: 40px;
+}
+
+
+.cardContent{
+    display: block;
+}
+
+.cardContentHidden{
+    display: none;
+}
+
