@@ -8,14 +8,14 @@ import { useState } from "react"
 function App() {
 
 
-  const cardGame = Array(TOTAL_CARDS.length).fill(null);
+  const cardGame = [... TOTAL_CARDS].fill(null);
   console.log(cardGame)
   
   const MAX_CARDS_UP = 2;
   const [cards, setCards] = useState(cardGame)
   const [countCardsUP, setCountCardsUP] = useState(0);
   const [cardPairs, setCardPairs] = useState([]);
-  const [indexPairs, setIndexPairs] = useState();
+  const [indexPairs, setIndexPairs] = useState([]);
 
 
   const setCardUp = (index) =>{
@@ -24,12 +24,16 @@ function App() {
       // Actualización del estado de las cartas
       const newCards = [... cards];
       newCards[index] = TOTAL_CARDS[index]
-      setCards(newCards);
-      
+      setCards(newCards);      
       
       const newCardPairs = cardPairs ?? [];
       newCardPairs.push(newCards[index])
       setCardPairs(newCardPairs);
+      
+
+      const newIndex = indexPairs ?? [];
+      newIndex.push(index);
+      setIndexPairs(newIndex);
 
       
       //Conteo de cartas levantadass
@@ -41,21 +45,7 @@ function App() {
         const firstCardUP = cardPairs[0]
         if (cardPairs.every((cards) => cards === firstCardUP)){
 
-          cardPairs.forEach(cardPair => {
-            const newIndexPairs = [];
-              
-            for (let i = 0; i < cards.length; i++){
-              if (cards[i] == cardPair){
-                newIndexPairs.push(i)
-              }
-            }
-
-            console.log(newIndexPairs);
-                      
-            setIndexPairs(newIndexPairs);
-          });
-
-          console.log(indexPairs)
+          console.log('Indice de parejas: ' + indexPairs)
 
 
           console.log("Pareja econtrada")
