@@ -7,7 +7,6 @@ import { useState } from "react"
 
 function App() {
 
-
   const cardGame = [... TOTAL_CARDS].fill(null);
   console.log(cardGame)
   
@@ -16,6 +15,18 @@ function App() {
   const [countCardsUP, setCountCardsUP] = useState(0);
   const [cardPairs, setCardPairs] = useState([]);
   const [indexPairs, setIndexPairs] = useState([]);
+
+    const refreshCrads = () =>{
+    const newCards = [... cards];
+    const updatedCards = newCards.map((card, index) => {
+      if (!indexPairs.includes(index)){
+        card = null
+      }
+    })
+
+    console.log(updatedCards);
+    setCards(updatedCards)
+  }
 
 
   const setCardUp = (index) =>{
@@ -46,16 +57,18 @@ function App() {
         if (cardPairs.every((cards) => cards === firstCardUP)){
 
           console.log('Indice de parejas: ' + indexPairs)
-
-
           console.log("Pareja econtrada")
         }else{
           console.log("Error. La pareja de cartas levantada no coincide")
+          
+          // Reiniciamos el contador de cartas para permitir continuar el juego
+          refreshCrads()
+          setCountCardsUP(0)
+
 
         }
       }
     }
-
 
 
   }
