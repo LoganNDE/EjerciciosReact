@@ -3,6 +3,7 @@ import { CARDS, TOTAL_CARDS } from "./logic"
 import './App.css'
 import JSConfetti from 'js-confetti'
 import { useEffect, useState } from "react"
+import { Popup } from "./components/Popup"
 
 
 
@@ -18,7 +19,29 @@ function App() {
   const [cardPairs, setCardPairs] = useState([]);
   const [pairsFounded, setPairsFounded] = useState([]);
   const [pairsDOM, setPairsDOM] = useState([]);
+  const [winner, setWinner] = useState(false);
 
+
+
+  const restGame = () =>{
+    setCards(cardGame);
+    setCardUp(0)
+    setCardPairs([])
+    setPairsFounded([])
+    setPairsDOM([])
+    setWinner(false);
+    const allCards = document.querySelectorAll('flipEffect');
+    allCards.forEach((card) => card.classList.remove('flipEffect'));
+  }
+
+ 
+
+  useEffect(() =>{
+    if (cards.every((card) => card != null)){
+      console.log("Tenemos ganador");
+      setWinner(true);
+    }
+  }, [cards])
     
   
   
@@ -92,7 +115,7 @@ function App() {
 
 
   const setCardUp = (index, event) =>{
-    if (countCardsUP < MAX_CARDS_UP){
+    if (countCardsUP < MAX_CARDS_UP && !winner){
 
       // Flip card
       const targetFlipCard = event.target.closest('.flip-card-inner');
@@ -123,6 +146,7 @@ function App() {
     <>
       <h1 className="text-2xl font-bold text-white mb-6 md:text-4xl md:mb-12">Memory Game | Desafía tu mente</h1>
       <div className="board">
+
           {cards.map((card, index) => {
             return(
               <>
@@ -134,6 +158,7 @@ function App() {
             )
           })}
       </div>
+      {winner && <Popup textDisplay={"Enhorabuena has ganado"} textButton={"Volver a jugar"} actionButton={restGame}/>}
     </>
   )
 }
