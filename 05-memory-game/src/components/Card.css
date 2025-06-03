@@ -56,7 +56,7 @@
 
 @media(max-width: 768px){
     .flip-card{
-        width: 80px;
+        width: 100px;
         height: 80px;
     }
 }

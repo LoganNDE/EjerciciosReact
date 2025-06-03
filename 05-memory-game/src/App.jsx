@@ -121,6 +121,7 @@ function App() {
 
   return (
     <>
+      <h1 className="text-2xl font-bold text-white mb-6 md:text-4xl md:mb-12">Memory Game | Desafía tu mente</h1>
       <div className="board">
           {cards.map((card, index) => {
             return(
