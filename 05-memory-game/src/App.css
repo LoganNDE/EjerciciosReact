@@ -6,7 +6,16 @@ body{
 }
 
 .board{
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 40px;
+}
+
+
+@media(max-width: 768px){
+  .board{
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+  }
 }
