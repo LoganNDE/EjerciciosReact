@@ -30,16 +30,23 @@ function App() {
     setPairsFounded([])
     setPairsDOM([])
     setWinner(false);
-    const allCards = document.querySelectorAll('flipEffect');
+    const allCards = document.querySelectorAll('.flipEffect');
     allCards.forEach((card) => card.classList.remove('flipEffect'));
   }
 
- 
+    // Comprobar ganador
+      const displayConfetti = () =>{
+      const jsConfetti = new JSConfetti()
+      jsConfetti.addConfetti()
+  }
 
+ 
+  // Comprobamos si todas las cartas han sido encontradas
   useEffect(() =>{
     if (cards.every((card) => card != null)){
       console.log("Tenemos ganador");
       setWinner(true);
+      displayConfetti();
     }
   }, [cards])
     
@@ -61,7 +68,6 @@ function App() {
     setCards(updatedCards)
   }
 
-
   useEffect(() =>{
     if (cardPairs.length == 2){
         const firstCardUP = cardPairs[0]
@@ -71,8 +77,6 @@ function App() {
 
         const idTimeout = setTimeout(() => {
           if (isPairs){
-            const jsConfetti = new JSConfetti()
-            jsConfetti.addConfetti()
 
             const copyPairsDOM = [... pairsDOM];
             copyPairsDOM.forEach((cardDOM) =>{
@@ -117,26 +121,31 @@ function App() {
   const setCardUp = (index, event) =>{
     if (countCardsUP < MAX_CARDS_UP && !winner){
 
-      // Flip card
-      const targetFlipCard = event.target.closest('.flip-card-inner');
-      targetFlipCard.classList.add('flipEffect', 'no-pair')
-      const newPairsDOM = [ ... pairsDOM];
-      newPairsDOM.push(targetFlipCard)
-      setPairsDOM(newPairsDOM);
+      // Actualización del estado de las cartas
+      if (cards[index] === null){
+
+        // Flip card
+        const targetFlipCard = event.target.closest('.flip-card-inner');
+        targetFlipCard.classList.add('flipEffect', 'no-pair')
+        const newPairsDOM = [ ... pairsDOM];
+        newPairsDOM.push(targetFlipCard)
+        setPairsDOM(newPairsDOM);
+
+        const newCards = [... cards];
+        newCards[index] = TOTAL_CARDS[index]
+        setCards(newCards);
+      
+        const newCardPairs = [... cardPairs];
+        newCardPairs.push(newCards[index])
+        setCardPairs(newCardPairs);
+        
+        //Conteo de cartas levantadass
+        const newCountCardsUP = countCardsUP + 1;
+        setCountCardsUP(newCountCardsUP)
+      }
 
       
-      // Actualización del estado de las cartas
-      const newCards = [... cards];
-      newCards[index] = TOTAL_CARDS[index]
-      setCards(newCards);
-      
-      const newCardPairs = [... cardPairs];
-      newCardPairs.push(newCards[index])
-      setCardPairs(newCardPairs);
-      
-      //Conteo de cartas levantadass
-      const newCountCardsUP = countCardsUP + 1;
-      setCountCardsUP(newCountCardsUP)
+
     }
 
 
