@@ -18,14 +18,14 @@ function App() {
       window.addEventListener('pointermove', handleMouse)
     }
     
+
+    // Cleanup - Se ejecuta cuando el componente se desmorta y tambien se ejecuta cuando cambian las dependencias
     return () => {
       console.log("EventListener limpiado")
       window.removeEventListener('pointermove', handleMouse);
     }
 
   }, [enabled])
-
-  
 
   return(
     <main>
@@ -34,8 +34,9 @@ function App() {
         width: '40px',
         height: '40px',
         position: 'absolute',
-        top: '0px',
-        left: '0px',
+        pointerEvents: 'none',
+        top: '-15px',
+        left: '-15px',
         borderRadius: '50%',
         transform: `translate(${position.x}px, ${position.y}px)`
       }}></div>

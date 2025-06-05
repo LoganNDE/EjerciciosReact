@@ -32,6 +32,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+}
+
+.card::selection{
+  background: transparent;
+}
+
+.card::-moz-selection{
+    background: transparent;
 }
 
 .flip-card-front {
